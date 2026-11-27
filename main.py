@@ -8,6 +8,7 @@ output bytes.
 """
 
 import os
+from pathlib import Path
 
 # Get output directory from environment, default to /output
 output_dir = os.environ.get('MAKEFUN_OUTPUT_DIR', '/output')
@@ -15,8 +16,9 @@ output_dir = os.environ.get('MAKEFUN_OUTPUT_DIR', '/output')
 # Create output directory if needed
 os.makedirs(output_dir, exist_ok=True)
 
-# Read the input file
-with open('line.txt', 'rb') as f:
+# Read the input file (relative to this script's location)
+input_path = Path(__file__).resolve().parent / "line.txt"
+with open(input_path, 'rb') as f:
     content = f.read()
 
 # Write to output file with world-readable permissions
